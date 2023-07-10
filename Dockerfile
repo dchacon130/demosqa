@@ -11,3 +11,6 @@ USER seluser
 # Instalar dependencias de Python
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
+
+# Agregar ~/.local/bin al PATH
+ENV PATH="/home/seluser/.local/bin:${PATH}"
