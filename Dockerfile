@@ -3,6 +3,7 @@ FROM selenium/standalone-firefox:latest
 # Actualizar e instalar dependencias necesarias
 USER root
 RUN apt-get update && apt-get install -y \
+    apt-utils \
     python3 \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
