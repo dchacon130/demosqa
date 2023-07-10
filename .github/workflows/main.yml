@@ -1,0 +1,19 @@
+name: Ejecutar pruebas de Behave con Selenium
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del repositorio
+      uses: actions/checkout@v2
+
+    - name: Ejecutar pruebas
+      run: |
+        docker build -t behave-tests .
+        docker run behave-tests behave
