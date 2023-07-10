@@ -1,0 +1,11 @@
+class TextBoxLocators:
+    locator_full_name_field = 'userName'
+    locator_full_email_field = 'userEmail'
+    locator_full_current_address_field = 'currentAddress'
+    locator_full_permanent_address_field = 'permanentAddress'
+    locator_submit_button = 'submit'
+    locator_output_div = 'output'
+    locator_output_name = 'name'
+    locator_full_email_field = 'userEmail'
+    locator_email_field_color = '.field-error'
+    locator_valor_border = 'border'

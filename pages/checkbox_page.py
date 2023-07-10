@@ -1,10 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators.checkbox_locators import CheckBoxLocators
 
 class CheckboxPage:
     def __init__(self, driver) -> None:
         self.driver = driver
+        
 
     def open_web_page(self, url):
         try:
@@ -17,9 +19,10 @@ class CheckboxPage:
 
     def select_all_checkboxes(self):
         try:
-            select_checkbox = self.driver.find_element(by=By.CLASS_NAME, value="rct-icon-uncheck")
+            cbl = CheckBoxLocators()
+            select_checkbox = self.driver.find_element(by=By.CLASS_NAME, value=cbl.locator_select_checkbox)
             select_checkbox.click()
-            expand_arrows = self.driver.find_element(by=By.CLASS_NAME, value="rct-icon-expand-close")
+            expand_arrows = self.driver.find_element(by=By.CLASS_NAME, value=cbl.locator_expand_arrows)
             expand_arrows.click()
             return True
         except Exception as ex:
@@ -28,7 +31,8 @@ class CheckboxPage:
 
     def validate_checkboxes_selected(self):
         try:
-            result = self.driver.find_element(by=By.ID, value='result')
+            cbl = CheckBoxLocators()
+            result = self.driver.find_element(by=By.ID, value=cbl.locator_result)
             if result:
                 self.driver.save_screenshot('../screenshots/validate_checkboxes_selected.png')
                 return True

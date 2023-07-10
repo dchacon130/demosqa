@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators.textbox_locators import TextBoxLocators
 
 class TextBoxPages:
     def __init__(self,driver) -> None:
@@ -19,7 +20,8 @@ class TextBoxPages:
 
     def enter_full_name(self, name):
         try:
-            full_name_field = self.driver.find_element(by=By.ID, value='userName')
+            tbl = TextBoxLocators()
+            full_name_field = self.driver.find_element(by=By.ID, value=tbl.locator_full_name_field)
             full_name_field.send_keys(name)
             return True
         except Exception as ex:
@@ -29,7 +31,8 @@ class TextBoxPages:
     
     def enter_full_email(self, email):
         try:
-            full_email_field = self.driver.find_element(by=By.ID, value='userEmail')
+            tbl = TextBoxLocators()
+            full_email_field = self.driver.find_element(by=By.ID, value=tbl.locator_full_email_field)
             full_email_field.send_keys(email)
             return True
         except Exception as ex:
@@ -39,7 +42,8 @@ class TextBoxPages:
         
     def enter_full_current_address(self, current_address):
         try:
-            full_current_address_field = self.driver.find_element(by=By.ID, value='currentAddress')
+            tbl = TextBoxLocators()
+            full_current_address_field = self.driver.find_element(by=By.ID, value=tbl.locator_full_current_address_field)
             full_current_address_field.send_keys(current_address)
             return True
         except Exception as ex:
@@ -49,7 +53,8 @@ class TextBoxPages:
     
     def enter_full_permanent_address(self, permanent_address):
         try:
-            full_permanent_address_field = self.driver.find_element(by=By.ID, value='permanentAddress')
+            tbl = TextBoxLocators()
+            full_permanent_address_field = self.driver.find_element(by=By.ID, value=tbl.locator_full_permanent_address_field)
             full_permanent_address_field.send_keys(permanent_address)
             return True
         except Exception as ex:
@@ -59,7 +64,8 @@ class TextBoxPages:
         
     def click_submit_button(self):
         try:
-            submit_button = self.driver.find_element(by=By.ID, value='submit')
+            tbl = TextBoxLocators()
+            submit_button = self.driver.find_element(by=By.ID, value=tbl.locator_submit_button)
             self.driver.save_screenshot('../screenshots/click_submit_button.png')
             submit_button.click()
             return True
@@ -70,9 +76,10 @@ class TextBoxPages:
         
     def get_output_div(self):
         try:
-            output_div = self.driver.find_element(by=By.ID, value='output')
+            tbl = TextBoxLocators()
+            output_div = self.driver.find_element(by=By.ID, value=tbl.locator_output_div)
             if output_div:
-                output_name = self.driver.find_element(by=By.ID, value='name').text
+                output_name = self.driver.find_element(by=By.ID, value=tbl.locator_output_name).text
                 print('output_name: ', output_name)
                 self.driver.save_screenshot('../screenshots/get_output_div.png')
                 return True
@@ -85,7 +92,8 @@ class TextBoxPages:
         
     def enter_invalid_email(self, email):
         try:
-            full_email_field = self.driver.find_element(by=By.ID, value='userEmail')
+            tbl = TextBoxLocators()
+            full_email_field = self.driver.find_element(by=By.ID, value=tbl.locator_full_email_field)
             full_email_field.send_keys(email)
             return True
         except Exception as ex:
@@ -95,8 +103,9 @@ class TextBoxPages:
         
     def get_red_color_email(self):
         try:
-            email_field_color = self.driver.find_element(by=By.CSS_SELECTOR, value='.field-error')
-            valor_border = email_field_color.value_of_css_property('border')
+            tbl = TextBoxLocators()
+            email_field_color = self.driver.find_element(by=By.CSS_SELECTOR, value=tbl.locator_email_field_color)
+            valor_border = email_field_color.value_of_css_property(tbl.locator_valor_border)
             print('valor_border: ', valor_border)
             if '1px solid rgb(255, 0, 0)' == valor_border:
                 self.driver.save_screenshot('../screenshots/get_red_color_email.png')
