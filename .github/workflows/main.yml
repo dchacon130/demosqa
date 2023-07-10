@@ -16,4 +16,4 @@ jobs:
     - name: Ejecutar pruebas
       run: |
         docker build -t behave-tests .
-        docker run behave-tests behave
+        docker run behave-tests

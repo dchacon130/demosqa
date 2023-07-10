@@ -1,23 +1,23 @@
-FROM selenium/standalone-firefox:latest
+FROM python:3.9-slim
 
-# Actualizar e instalar dependencias necesarias
-USER root
+# Instalar dependencias necesarias
 RUN apt-get update && apt-get install -y \
-    apt-utils \
-    python3 \
-    python3-pip \
+    firefox-esr \
+    xvfb \
     && rm -rf /var/lib/apt/lists/*
 
-# Descargar e instalar apt-utils
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils \
-    && rm -rf /var/lib/apt/lists/*
+# Configurar variables de entorno para ejecutar en modo headless
+ENV MOZ_HEADLESS=1
+ENV DISPLAY=:99
 
-USER seluser
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Copiar archivos de la acción
+COPY . /app
 
 # Instalar dependencias de Python
-COPY requirements.txt .
-RUN pip3 install --user -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Agregar ~/.local/bin al PATH en el archivo .bashrc
-RUN echo "export PATH=/home/seluser/.local/bin:$PATH" >> /home/seluser/.bashrc
+# Configurar el entorno para ejecutar los tests
+CMD ["behave"]
